@@ -14,6 +14,7 @@ public class Review implements Comparable<Review> {
     private String content;
     private int restaurantId;
     private long createdat;
+    private String formattedCreatedAt;
 
     public Review(String writtenBy, int rating, String content, int restaurantId) {
         this.writtenBy = writtenBy;
@@ -21,6 +22,7 @@ public class Review implements Comparable<Review> {
         this.content = content;
         this.restaurantId = restaurantId;
         this.createdat = System.currentTimeMillis();
+        setFormattedCreatedAt();
     }
 
     public int getId() {
@@ -79,6 +81,12 @@ public class Review implements Comparable<Review> {
         return sdf.format(date);
     }
 
+    public void setFormattedCreatedAt(){
+        Date date = new Date(this.createdat);
+        String datePatternToUse = "MM/dd/yyyy @ K:mm a";
+        SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
+        this.formattedCreatedAt = sdf.format(date);
+    }
 
     @Override
     public int compareTo(Review o) {

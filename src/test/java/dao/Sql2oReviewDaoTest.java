@@ -64,8 +64,12 @@ public class Sql2oReviewDaoTest {
         Review testReview = new Review("Captain Kirk", 3, "foodcoma!", testRestaurant.getId());
         reviewDao.add(testReview);
 
-        long creationTime = testReview.getcreatedat();
-        assertEquals(creationTime, reviewDao.getAll().get(0).getcreatedat());
+        long creationTime = testReview.getCreatedat();
+        long savedTime = reviewDao.getAll().get(0).getCreatedat();
+        String formattedCreationTime = testReview.getFormattedCreatedAt();
+        String formattedSavedTime = reviewDao.getAll().get(0).getFormattedCreatedAt();
+        assertEquals(formattedCreationTime,formattedSavedTime);
+        assertEquals(creationTime, reviewDao.getAll().get(0).getCreatedat());
     }
 
     @Test
@@ -103,7 +107,7 @@ public class Sql2oReviewDaoTest {
 
         Review testFourthReview = new Review("Sulu", 2, "I prefer home cooking", testRestaurant.getId());
         reviewDao.add(testFourthReview);
-
+        assertEquals(4, reviewDao.getAllReviewsByRestaurant(testRestaurant.getId()).size());
         assertEquals("I prefer home cooking", reviewDao.getAllReviewsByRestaurantSortedNewestToOldest(testRestaurant.getId()).get(0).getContent());
     }
 

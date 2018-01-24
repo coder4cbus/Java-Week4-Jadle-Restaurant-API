@@ -31,7 +31,8 @@ public class App {
             int restaurantId = Integer.parseInt(req.params("restaurantId"));
             Review review = gson.fromJson(req.body(), Review.class);
             review.setCreatedat();
-            review.setRestaurantId(restaurantId); //why do I need to get set separately?
+            review.setFormattedCreatedAt();
+            review.setRestaurantId(restaurantId); //we need to set this separately because it comes from our route, not our JSON input.
             reviewDao.add(review);
             res.status(201);
             return gson.toJson(review);
@@ -76,7 +77,7 @@ public class App {
             return gson.toJson(allReviews);
         });
 
-        get("/restaurants/:id/sortedReviews", "application/json", (req, res) -> { //// TODO: 1/18/18 generalize this route so that it can be used to return either sorted reviews or unsorted ones.  
+        get("/restaurants/:id/sortedReviews", "application/json", (req, res) -> { //// TODO: 1/18/18 generalize this route so that it can be used to return either sorted reviews or unsorted ones.
             int restaurantId = Integer.parseInt(req.params("id"));
             Restaurant restaurantToFind = restaurantDao.findById(restaurantId);
             List<Review> allReviews;
