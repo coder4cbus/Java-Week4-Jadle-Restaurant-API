@@ -6,21 +6,19 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 
-public class Review implements Comparable<Review> {
+public class Review  {
 
     private int id;
     private String writtenBy;
     private int rating;
     private String content;
     private int restaurantId;
-    private long createdat;
 
     public Review(String writtenBy, int rating, String content, int restaurantId) {
         this.writtenBy = writtenBy;
         this.rating = rating;
         this.content = content;
         this.restaurantId = restaurantId;
-        this.createdat = System.currentTimeMillis();
     }
 
     public int getId() {
@@ -61,38 +59,6 @@ public class Review implements Comparable<Review> {
 
     public void setRestaurantId(int restaurantId) {
         this.restaurantId = restaurantId;
-    }
-
-    public long getCreatedat() {
-        return createdat;
-    }
-
-    public void setCreatedat() {
-        this.createdat = System.currentTimeMillis();
-
-    }
-
-    public String getFormattedCreatedAt(){
-        Date date = new Date(createdat);
-        String datePatternToUse = "MM/dd/yyyy @ K:mm a"; //see https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-        SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
-        return sdf.format(date);
-    }
-
-
-    @Override
-    public int compareTo(Review o) {
-        if (this.createdat < o.createdat)
-        {
-            return -1; //this object was made earlier than the second object.
-        }
-        else if (this.createdat > o.createdat){ //this object was made later than the second object
-            return +1;
-        }
-
-        else {
-            return 0; //they were made at the same time, which is very unlikely.
-        }
     }
 
     @Override
