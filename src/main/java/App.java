@@ -20,8 +20,8 @@ public class App {
         Sql2oReviewDao reviewDao;
         Connection conn;
         Gson gson = new Gson();
-        String connectionString = "jdbc:h2:~/jadle.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        String connectionString = "jdbc:postgresql://localhost:5432/jadle";
+        Sql2o sql2o = new Sql2o(connectionString, null, null);
 
         restaurantDao = new Sql2oRestaurantDao(sql2o);
         foodtypeDao = new Sql2oFoodtypeDao(sql2o);

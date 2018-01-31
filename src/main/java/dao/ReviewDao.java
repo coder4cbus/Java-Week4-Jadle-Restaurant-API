@@ -23,4 +23,6 @@ public interface ReviewDao {
     //delete
     void deleteById(int id); //O
 
+    void clearAll();
+
 }

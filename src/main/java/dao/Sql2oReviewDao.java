@@ -88,4 +88,14 @@ public class Sql2oReviewDao implements ReviewDao {
         }
     return sortedReviews;
     }
+
+    @Override
+    public void clearAll() {
+        String sql = "DELETE from reviews";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql).executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
+    }
 }

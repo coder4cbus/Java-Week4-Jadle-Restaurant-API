@@ -63,7 +63,7 @@ public class Sql2oFoodtypeDao implements FoodtypeDao{ //don't forget to shake ha
     public void addFoodtypeToRestaurant(Foodtype foodtype, Restaurant restaurant){
         String sql = "INSERT INTO restaurants_foodtypes (restaurantid, foodtypeid) VALUES (:restaurantId, :foodtypeId)";
         try (Connection con = sql2o.open()) {
-            con.createQuery(sql)
+            con.createQuery(sql, true)
                     .addParameter("restaurantId", restaurant.getId())
                     .addParameter("foodtypeId", foodtype.getId())
                     .executeUpdate();
@@ -94,5 +94,15 @@ public class Sql2oFoodtypeDao implements FoodtypeDao{ //don't forget to shake ha
             System.out.println(ex);
         }
         return restaurants;
+    }
+
+    @Override
+    public void clearAll() {
+        String sql = "DELETE from foodtypes";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql).executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 }
