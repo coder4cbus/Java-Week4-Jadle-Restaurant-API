@@ -15,7 +15,7 @@ public interface RestaurantDao {
 
     //read
     List<Restaurant> getAll(); //A
-    List<Foodtype> getAllFoodtypesForARestaurant(int restaurantId); //D - we will implement this soon.
+    List<Foodtype> getAllFoodtypesByRestaurant(int restaurantId); //D - we will implement this soon.
 
     Restaurant findById(int id); //B
 
