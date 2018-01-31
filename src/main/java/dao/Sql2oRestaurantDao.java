@@ -21,7 +21,7 @@ public class Sql2oRestaurantDao implements RestaurantDao{ //don't forget to shak
     public void add(Restaurant restaurant) {
         String sql = "INSERT INTO restaurants (name, address, zipcode, phone, website, email) VALUES (:name, :address, :zipcode, :phone, :website, :email)";
         try(Connection con = sql2o.open()){
-            int id = (int) con.createQuery(sql)
+            int id = (int) con.createQuery(sql, true)
                     .bind(restaurant)
                     .executeUpdate()
                     .getKey();

@@ -18,7 +18,7 @@ public class Sql2oReviewDao implements ReviewDao {
     public void add(Review review) {
         String sql = "INSERT INTO reviews (writtenby, rating, createdat, restaurantid) VALUES (:writtenBy, :rating, :createdAt, :restaurantId)";
         try (Connection con = sql2o.open()) {
-            int id = (int) con.createQuery(sql)
+            int id = (int) con.createQuery(sql, true)
                     .bind(review)
                     .executeUpdate()
                     .getKey();

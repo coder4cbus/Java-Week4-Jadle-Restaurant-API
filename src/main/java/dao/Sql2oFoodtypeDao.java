@@ -21,7 +21,7 @@ public class Sql2oFoodtypeDao implements FoodtypeDao{ //don't forget to shake ha
     public void add(Foodtype foodtype) {
         String sql = "INSERT INTO foodtypes (name) VALUES (:name)";
         try(Connection con = sql2o.open()){
-            int id = (int) con.createQuery(sql)
+            int id = (int) con.createQuery(sql, true)
                     .bind(foodtype)
                     .executeUpdate()
                     .getKey();
